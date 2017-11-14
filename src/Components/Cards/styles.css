@@ -1,0 +1,13 @@
+.cards {
+  min-width: 650px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cards__addButton {
+  width: 100px;
+  height: 30px;
+  margin: 10px;
+  align-self: center;
+  cursor: pointer;
+}

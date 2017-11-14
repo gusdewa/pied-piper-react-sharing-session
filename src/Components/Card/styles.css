@@ -1,0 +1,37 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  max-height: 250px;
+  width: 700px;
+  margin: 10px;
+}
+
+.card__image {
+  width: 200px;
+  height: 200px;
+}
+
+.card__button * {
+  color: rgb(143, 0, 0);
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.card__textBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 20px;
+  min-width: 450px;
+}
+
+.card__textBlock__title {
+  font-weight: bolder;
+  font-size: 1.1 rem;
+  text-align: left;
+  max-height: 50px;
+}
+
+.card__textBlock__description {
+  text-align: left;
+}
