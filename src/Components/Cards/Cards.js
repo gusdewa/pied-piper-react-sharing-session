@@ -5,6 +5,13 @@ import CardAddNew from '../CardAddNew';
 import data from './data';
 import './styles.css';
 
+const getNewId = (items) => {
+  if (items && items.length !== 0) {
+    return Math.max.apply(null, items.map(v => v.id)) + 1 + '';
+  }
+  return '0';
+}
+
 class Cards extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +43,7 @@ class Cards extends Component {
     this.setState((prevStates) => ({
       items: [...prevStates.items, {
         ...prevStates.itemToAdd,
-        id: Math.max.apply(null, prevStates.items.map(v => v.id)) + 1 + '',
+        id: getNewId(prevStates.items)
       }],
       isAddingNewItem: false,
       itemToAdd: {
