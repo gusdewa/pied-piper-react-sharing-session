@@ -10,8 +10,20 @@ const CardAddNew = props => {
     <div className="cardAddNew">
       <img src={image} alt="A dummy one" className="cardAddNew_image"/>
       <div className="cardAddNew__textBlock">
-        <input className="cardAddNew__textBlock__title" value={props.itemToAdd.title}/>
-        ​<textarea className="cardAddNew_textBlock__description" rows="3" cols="50">{props.itemToAdd.description}</textarea>
+        <input
+          className="cardAddNew__textBlock__title"
+          name="title"
+          onChange={props.onFormChange}
+          defaultValue={props.itemToAdd.title}
+        />
+        ​<textarea
+          className="cardAddNew_textBlock__description"
+          name="description"
+          rows="3"
+          cols="50"
+          defaultValue={props.itemToAdd.description}
+          onChange={props.onFormChange}
+        />
       </div>
       <div className="cardAddNew_button">
         <Icon

@@ -11,7 +11,7 @@
   height: 200px;
 }
 
-.cardAddNew__button * {
+.cardAddNew_button * {
   color: rgb(28, 119, 0);
   font-weight: bolder;
   cursor: pointer;
@@ -21,8 +21,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-left: 20px;
-  min-width: 450px;
+  margin: 0 20px;
+  min-width: 420px;
 }
 
 .cardAddNew__textBlock__title {

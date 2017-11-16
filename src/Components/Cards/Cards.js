@@ -11,6 +11,7 @@ class Cards extends Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddNew = this.handleAddNew.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.handleFormChange = this.handleFormChange.bind(this);
     this.state = {
       items: data,
       isAddingNewItem: false,
@@ -22,29 +23,37 @@ class Cards extends Component {
   }
 
   handleDelete(id) {
-    const items = this.state.items.filter(x => x.id !== id);
-    this.setState({
-      items
-    });
+    this.setState((prevStates) => ({
+      items: prevStates.items.filter(x => x.id !== id)
+    }));
   }
 
   handleAddNew() {
-    this.setState({
-      isAddingNewItem: true,
-    });
+    this.setState({ isAddingNewItem: true });
   }
 
   handleSave() {
-    const { title, description } = this.state.itemToAdd;
-    const items = [...this.state.items, {
-      id: Math.max.apply(null, this.state.items.map(v => v.id)) + 1 + '',
-      title,
-      description
-    }];
+    this.setState((prevStates) => ({
+      items: [...prevStates.items, {
+        ...prevStates.itemToAdd,
+        id: Math.max.apply(null, prevStates.items.map(v => v.id)) + 1 + '',
+      }],
+      isAddingNewItem: false,
+      itemToAdd: {
+        title: '',
+        description: '',
+      },
+    }));
+  }
 
-    this.setState({
-      items
-    });
+  handleFormChange(e) {
+    const { name, value } = e.currentTarget;
+    this.setState((prevStates) => ({
+      itemToAdd: {
+        ...prevStates.itemToAdd,
+        [name]: value
+      },
+    }));
   }
 
   render() {
@@ -58,6 +67,7 @@ class Cards extends Component {
             <CardAddNew
               itemToAdd={this.state.itemToAdd}
               onSave={this.handleSave}
+              onFormChange={this.handleFormChange}
             />
           )
         }

@@ -28,7 +28,7 @@ Card.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,  
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default Card;
