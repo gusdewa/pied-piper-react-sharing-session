@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import Card from '../Card';
 import CardAddNew from '../CardAddNew';
+import * as actions from '../../Actions';
 
-import data from './data';
 import './styles.css';
 
 const getNewId = (items) => {
@@ -20,7 +22,6 @@ class Cards extends Component {
     this.handleSave = this.handleSave.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
     this.state = {
-      items: data,
       isAddingNewItem: false,
       itemToAdd: {
         title: '',
@@ -30,9 +31,7 @@ class Cards extends Component {
   }
 
   handleDelete(id) {
-    this.setState((prevStates) => ({
-      items: prevStates.items.filter(x => x.id !== id)
-    }));
+    this.props.removeItem(id);
   }
 
   handleAddNew() {
@@ -40,11 +39,12 @@ class Cards extends Component {
   }
 
   handleSave() {
+    this.props.addItem({
+      ...this.state.itemToAdd,
+      id: getNewId(this.props.items)
+    });
+
     this.setState((prevStates) => ({
-      items: [...prevStates.items, {
-        ...prevStates.itemToAdd,
-        id: getNewId(prevStates.items)
-      }],
       isAddingNewItem: false,
       itemToAdd: {
         title: '',
@@ -79,7 +79,7 @@ class Cards extends Component {
           )
         }
         {
-          this.state.items.map((v) => (
+          this.props.items.map((v) => (
             <Card
               key={v.id}
               id={v.id}
@@ -94,4 +94,15 @@ class Cards extends Component {
   }
 }
 
-export default Cards;
+// REACT REDUX PART 
+const mapStateToProps = (state) => ({
+  items: state.items,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  populateItems: (items) => dispatch(actions.populateItems(items)),
+  addItem: (item) => dispatch(actions.addItem(item)),
+  removeItem: (id) => dispatch(actions.removeItem(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cards);
